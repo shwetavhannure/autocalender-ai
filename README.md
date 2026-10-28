@@ -14,32 +14,6 @@ An intelligent, background worker system that scans incoming emails, extracts de
 
 ---
 
-## 📸 Demo & Screenshots
-
-### 1. Landing Page & OAuth Trigger
-The app checks for an active Google Workspace connection on load.
-
-<img src="docs/images/login-screen.png" width="700" alt="AI Deadline Auto-Pilot login screen">
-
-### 2. Google OAuth2 Authentication
-Secure, standard OAuth 2.0 consent flow — no credentials are stored outside the encrypted token store.
-
-<img src="docs/images/successfull-auth.png" width="700" alt="OAuth authentication success screen">
-
-### 3. Background Worker in Action
-The polling worker fetches unread mail, runs LLM extraction, and syncs directly to Google Calendar — fully autonomous, no manual intervention.
-
-<img src="docs/images/console-logs-worker.png" width="700" alt="Terminal output of background worker processing emails">
-
-### 4. Auto-Generated Calendar Events
-Each event is tagged with its source context, extracted venue, and default reminders — no manual data entry required.
-
-| Mess Registration Event | Assignment Deadline Event |
-| :---: | :---: |
-| <img src="docs/images/calendar-result-1.png" width="380"> | <img src="docs/images/calendar-result-2.png" width="380"> |
-
----
-
 ## System Architecture & Data Flow
 
 ```text
