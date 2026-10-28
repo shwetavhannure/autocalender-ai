@@ -1,0 +1,19 @@
+# Hugging Face & Deep Learning
+transformers
+torch
+sentencepiece
+
+# Google APIs
+google-auth-oauthlib
+google-auth-httplib2
+google-api-python-client
+
+# Utilities
+python-dotenv
+
+fastapi
+uvicorn
+huggingface_hub
+
+pymongo
+dnspython
