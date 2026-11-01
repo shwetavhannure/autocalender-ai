@@ -1,7 +1,7 @@
 
 # AutoCalendar AI: Autonomous Email-to-Calendar Assistant
 
-An intelligent, background worker system that scans incoming emails, extracts deadline and event metadata using LLMs, and automatically schedules structured events directly into Google Calendar.
+An intelligent, background worker and FastAPI web application that scans incoming emails, extracts deadline and event metadata using the Gemini API, and automatically schedules structured events directly into Google Calendar.
 
 ---
 
@@ -42,7 +42,7 @@ An intelligent, background worker system that scans incoming emails, extracts de
 
 | Component | Technology | Purpose |
 | --- | --- | --- |
-| Language | Python 3.10+ | Core application logic and pipeline runtime |
+| Language & Web | Python 3.10+, FastAPI | Core application logic, routing, and server runtime |
 | Database | MongoDB | User state, OAuth token storage, idempotency history |
 | AI Inference | Google Gemini API | Natural language extraction of unstructured dates/titles |
 | External APIs | Gmail API, Google Calendar API | Mail ingestion and calendar event injection |
@@ -54,6 +54,7 @@ An intelligent, background worker system that scans incoming emails, extracts de
 
 ```text
 autocalendar-ai/
+├── app.py                   # FastAPI web application entrypoint
 ├── config/
 │   └── settings.py          # Environment variables & system defaults
 ├── src/
@@ -110,8 +111,7 @@ POLLING_INTERVAL_SECONDS=300
 ### 4. Running the Application
 
 ```bash
-# Start the background polling worker
+# Start the FastAPI server / background polling worker
 python -m src.worker
 
 ```
-
