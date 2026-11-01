@@ -1,4 +1,4 @@
-```markdown
+
 # AutoCalendar AI: Autonomous Email-to-Calendar Assistant
 
 An intelligent, background worker system that scans incoming emails, extracts deadline and event metadata using LLMs, and automatically schedules structured events directly into Google Calendar.
