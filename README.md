@@ -1,3 +1,4 @@
+```markdown
 # AutoCalendar AI: Autonomous Email-to-Calendar Assistant
 
 An intelligent, background worker system that scans incoming emails, extracts deadline and event metadata using LLMs, and automatically schedules structured events directly into Google Calendar.
@@ -6,7 +7,7 @@ An intelligent, background worker system that scans incoming emails, extracts de
 
 ## Key Features
 
-- **LLM Event Extraction:** Leverages OpenRouter AI inference with dynamic time-context injection and few-shot prompts to parse relative dates (*"this Friday"*, *"17th of this month"*) into strict ISO-8601 timestamps.
+- **LLM Event Extraction:** Leverages Google Gemini AI inference with dynamic time-context injection and few-shot prompts to parse relative dates (*"this Friday"*, *"17th of this month"*) into strict ISO-8601 timestamps.
 - **Idempotent Background Worker:** Asynchronous worker loop in Python polling active mailboxes with duplicate-message filtering powered by MongoDB tracking.
 - **Contextual Event Titling:** Automatically maps email subjects, course names, and body text into descriptive event titles (e.g., *CS-302 Midterm Exam* instead of generic titles like *Exam*).
 - **Multi-User OAuth2 Architecture:** Secure token storage and handling via MongoDB for seamless multi-user calendar synchronization.
@@ -18,19 +19,20 @@ An intelligent, background worker system that scans incoming emails, extracts de
 
 ```text
 [ Gmail API ] ──( Fetch Unread )──> [ Background Worker ]
-                                           │
-                                  ( Subject + Body )
-                                           ▼
-                                  [ Parser Engine ]
-                                           │
-                                    ( OpenRouter LLM )
-                                           ▼
+                                            │
+                                    ( Subject + Body )
+                                            ▼
+                                    [ Parser Engine ]
+                                            │
+                                      ( Gemini API )
+                                            ▼
 [ Google Calendar ] <──( Inject Event )── [ Extracted Metadata ] ──( Log ID )──> [ MongoDB ]
+
 ```
 
 1. **Ingestion:** Worker fetches unread emails via the Gmail REST API.
 2. **Filtering:** Checks processing history in MongoDB to prevent duplicate runs.
-3. **Extraction:** ParserEngine formats context and sends requests to the LLM.
+3. **Extraction:** ParserEngine formats context and sends requests to the Gemini API.
 4. **Injection:** Parsed events are normalized and added to Google Calendar.
 5. **State Update:** MongoDB records `email_id` to enforce strict idempotency.
 
@@ -39,10 +41,10 @@ An intelligent, background worker system that scans incoming emails, extracts de
 ## 🛠️ Tech Stack
 
 | Component | Technology | Purpose |
-| :--- | :--- | :--- |
+| --- | --- | --- |
 | Language | Python 3.10+ | Core application logic and pipeline runtime |
 | Database | MongoDB | User state, OAuth token storage, idempotency history |
-| AI Inference | OpenRouter / Hugging Face | Natural language extraction of unstructured dates/titles |
+| AI Inference | Google Gemini API | Natural language extraction of unstructured dates/titles |
 | External APIs | Gmail API, Google Calendar API | Mail ingestion and calendar event injection |
 | Authentication | Google OAuth 2.0 | Multi-user credential delegation |
 
@@ -61,9 +63,10 @@ autocalendar-ai/
 │   ├── parser_engine.py     # LLM inference & prompt construction
 │   ├── utils.py             # Date normalization & output cleaning
 │   └── worker.py            # Main background polling process
-├── .env.example              # Template for required environment variables
-├── requirements.txt          # Project dependencies
-└── README.md                 # Project documentation
+├── .env.example             # Template for required environment variables
+├── requirements.txt         # Project dependencies
+└── README.md                # Project documentation
+
 ```
 
 ---
@@ -72,15 +75,15 @@ autocalendar-ai/
 
 ### 1. Prerequisites
 
-- Python 3.10 or higher
-- MongoDB instance (Local or MongoDB Atlas)
-- Google Cloud Console Project with Gmail & Calendar APIs enabled
+* Python 3.10 or higher
+* MongoDB instance (Local or MongoDB Atlas)
+* Google Cloud Console Project with Gmail & Calendar APIs enabled
 
 ### 2. Installation
 
 ```bash
 # Clone the repository
-git clone https://github.com/omkhot/AutoCalendar-AI.git
+git clone [https://github.com/shwetavhannure/autocalender-ai.git](https://github.com/shwetavhannure/autocalender-ai.git)
 cd autocalendar-ai
 
 # Create virtual environment
@@ -89,6 +92,7 @@ source venv/bin/activate  # On Windows: venv\Scripts\activate
 
 # Install dependencies
 pip install -r requirements.txt
+
 ```
 
 ### 3. Environment Setup
@@ -96,10 +100,11 @@ pip install -r requirements.txt
 Create a `.env` file in the root directory:
 
 ```env
-HF_TOKEN=your_openrouter_or_hf_token
+GEMINI_API_KEY=your_gemini_api_key_here
 MONGO_URI=mongodb://localhost:27017/
 DB_NAME=autocalendar_db
 POLLING_INTERVAL_SECONDS=300
+
 ```
 
 ### 4. Running the Application
@@ -107,6 +112,9 @@ POLLING_INTERVAL_SECONDS=300
 ```bash
 # Start the background polling worker
 python -m src.worker
+
 ```
 
----
+```
+
+```
