@@ -115,6 +115,3 @@ python -m src.worker
 
 ```
 
-```
-
-```
